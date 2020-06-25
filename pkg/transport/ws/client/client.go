@@ -3,18 +3,16 @@ package client
 import (
 	"fmt"
 	"net/url"
-	"os"
-	"os/signal"
-	"time"
 
 	"github.com/gorilla/websocket"
 	"github.com/rs/zerolog/log"
 
-	pb "github.com/kolya59/easy_normalization/proto"
+	"github.com/KarinaBotova/Normalization/models"
 )
-//сокет
+
+// сокет
 func SendStudents(Students []models.Student, host, port string) error {
-		u := url.URL{Scheme: "ws", Host: fmt.Sprintf("%s:%s", host, port), Path: "/"}
+	u := url.URL{Scheme: "ws", Host: fmt.Sprintf("%s:%s", host, port), Path: "/"}
 	log.Info().Msgf("Connecting to %s", u.String())
 	// инициализируем соединение
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
@@ -23,14 +21,14 @@ func SendStudents(Students []models.Student, host, port string) error {
 		return fmt.Errorf("failed to dial: %v", err)
 	}
 	defer c.Close()
-	//отправляем всех студентов по сокету
+	// отправляем всех студентов по сокету
 	for _, newStudent := range Students {
 		if err = c.WriteJSON(newStudent); err != nil {
 			log.Error().Err(err).Msg("Failed to write msg")
 			return fmt.Errorf("failed to write msg: %v", err)
 		}
 	}
-	//закрываем соединение
+	// закрываем соединение
 	if err := c.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, "")); err != nil {
 		log.Error().Err(err).Msg("Failed to write close msg")
 		return fmt.Errorf("failed to write close msg: %v", err)

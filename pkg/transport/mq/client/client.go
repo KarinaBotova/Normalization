@@ -8,7 +8,7 @@ import (
 
 	"cloud.google.com/go/pubsub"
 
-	pb "github.com/kolya59/easy_normalization/proto"
+	"github.com/KarinaBotova/Normalization/models"
 )
 
 type Client struct {
@@ -17,7 +17,7 @@ type Client struct {
 
 func NewClient(projectID, topicName string) (*Client, error) {
 	ctx := context.Background()
-	//создание клиента очереди
+	// создание клиента очереди
 	client, err := pubsub.NewClient(ctx, projectID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create client: %v", err)
@@ -30,7 +30,7 @@ func NewClient(projectID, topicName string) (*Client, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to check topic existense: %v", err)
 	}
-	if !exists { //если нет этой темы, то создаем ее
+	if !exists { // если нет этой темы, то создаем ее
 		if _, err = client.CreateTopic(ctx, topicName); err != nil {
 			return nil, fmt.Errorf("failed to create topic")
 		}
@@ -38,7 +38,8 @@ func NewClient(projectID, topicName string) (*Client, error) {
 
 	return &Client{topic: topic}, nil
 }
-//очередь
+
+// очередь
 func (c *Client) SendStudents(Students []models.Student) error {
 	data, err := json.Marshal(Students)
 	if err != nil {

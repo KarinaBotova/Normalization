@@ -5,7 +5,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/kolya59/easy_normalization/pkg/server"
+	"github.com/KarinaBotova/Normalization/pkg/server"
 )
 
 func main() {

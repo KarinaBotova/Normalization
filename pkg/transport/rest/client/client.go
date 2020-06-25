@@ -9,7 +9,7 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	pb "github.com/kolya59/easy_normalization/proto"
+	"github.com/KarinaBotova/Normalization/models"
 )
 
 func SendStudents(Students []models.Student, host, port string) error {

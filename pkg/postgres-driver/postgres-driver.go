@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/kolya59/easy_normalization/models"
+	"github.com/KarinaBotova/Normalization/models"
 
 	sq "github.com/Masterminds/squirrel"
 
@@ -76,8 +76,8 @@ func SaveStudents(students []models.Student) error {
 		Columns("id", "speciality").
 		Suffix("ON CONFLICT DO NOTHING")
 	queries[4] = sq.Insert("students").
-		Columns("fio", "zachet_book", "group").
-		Suffix("ON CONFLICT(model) DO NOTHING")
+		Columns("fio", "zachet_book", "\"group\"").
+		Suffix("ON CONFLICT DO NOTHING")
 
 	// Bind arguments to queries
 	for _, c := range students {

@@ -9,8 +9,8 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/rs/zerolog/log"
 
-	postgresdriver "github.com/kolya59/easy_normalization/pkg/postgres-driver"
-	pb "github.com/kolya59/easy_normalization/proto"
+	"github.com/KarinaBotova/Normalization/models"
+	postgresdriver "github.com/KarinaBotova/Normalization/pkg/postgres-driver"
 )
 
 var upgrader = websocket.Upgrader{} // use default options

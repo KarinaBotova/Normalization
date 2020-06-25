@@ -8,8 +8,8 @@ import (
 	"cloud.google.com/go/pubsub"
 	"github.com/rs/zerolog/log"
 
-	postgresdriver "github.com/kolya59/easy_normalization/pkg/postgres-driver"
-	pb "github.com/kolya59/easy_normalization/proto"
+	"github.com/KarinaBotova/Normalization/models"
+	postgresdriver "github.com/KarinaBotova/Normalization/pkg/postgres-driver"
 )
 
 func StartServer(projectID, topicName, subName string, done chan interface{}) {

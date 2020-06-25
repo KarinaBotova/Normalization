@@ -10,8 +10,8 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/rs/zerolog/log"
 
-	postgresdriver "github.com/kolya59/easy_normalization/pkg/postgres-driver"
-	pb "github.com/kolya59/easy_normalization/proto"
+	"github.com/KarinaBotova/Normalization/models"
+	postgresdriver "github.com/KarinaBotova/Normalization/pkg/postgres-driver"
 )
 
 func postStudent(w http.ResponseWriter, r *http.Request) {
@@ -38,7 +38,8 @@ func postStudent(w http.ResponseWriter, r *http.Request) {
 	log.Info().Msgf("Students %v was saved via REST", Students)
 	w.WriteHeader(http.StatusOK)
 }
-//запрос-ответ
+
+// запрос-ответ
 func StartServer(host, port string, done chan interface{}) {
 	// создаем роутер
 	r := chi.NewRouter()
